@@ -16,15 +16,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = User.TABLE_NAME)
-public class User {
+@Table(name = Usuarios.TABLE_NAME)
+public class Usuarios {
     public interface CreateUser {
     }
 
     public interface UpdateUser {
     }
 
-    public static final String TABLE_NAME = "user";
+    public static final String TABLE_NAME = "usuarios";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +44,10 @@ public class User {
 
     // private List<Task> tasks = new ArrayList<Task>();
 
-    public User() {
+    public Usuarios() {
     }
 
-    public User(Long id, String username, String password) {
+    public Usuarios(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -85,7 +85,7 @@ public class User {
         if (obj == null)
             return false;
 
-        if (!(obj instanceof User))
+        if (!(obj instanceof Usuarios))
             return false;
 
         return true;
