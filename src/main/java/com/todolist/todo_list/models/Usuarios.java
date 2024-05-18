@@ -2,6 +2,7 @@ package com.todolist.todo_list.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -42,7 +44,18 @@ public class Usuarios {
     @Size(groups = { CreateUser.class, UpdateUser.class }, min = 8, max = 60)
     private String password;
 
-    // private List<Task> tasks = new ArrayList<Task>();
+    @OneToMany(mappedBy = "usuario")
+    private List<Tarefas> tarefas = new ArrayList<Tarefas>();
+
+    public List<Tarefas> getTarefa() {
+        return this.tarefas;
+    }
+
+    public void setTarefa(List<Tarefas> tarefa) {
+        this.tarefas = tarefa;
+    }
+
+    
 
     public Usuarios() {
     }
@@ -88,7 +101,18 @@ public class Usuarios {
         if (!(obj instanceof Usuarios))
             return false;
 
-        return true;
+        Usuarios usuario = (Usuarios) obj;
+
+        if (this.id == null) {
+            if (usuario.id != null)
+                return false;
+            else if (!this.id.equals(usuario.id))
+                return false;
+        }
+
+        return Objects.equals(this.id, usuario.id) 
+                && Objects.equals(this.username, usuario.username)
+                && Objects.equals(this.password, usuario.password);
 
     }
 
