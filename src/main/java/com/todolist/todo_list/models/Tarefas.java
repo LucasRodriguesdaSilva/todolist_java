@@ -24,7 +24,7 @@ public class Tarefas {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
-    private Usuarios usuario;
+    private Usuario usuario;
 
     @Column(name = "descricao", length = 255, nullable = false)
     @NotBlank
@@ -34,7 +34,7 @@ public class Tarefas {
     public Tarefas() {
     }
 
-    public Tarefas(Long id, Usuarios usuario, String descricao) {
+    public Tarefas(Long id, Usuario usuario, String descricao) {
         this.id = id;
         this.usuario = usuario;
         this.descricao = descricao;
@@ -48,11 +48,11 @@ public class Tarefas {
         this.id = id;
     }
 
-    public Usuarios getUsuario() {
+    public Usuario getUsuario() {
         return this.usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -69,7 +69,7 @@ public class Tarefas {
         return this;
     }
 
-    public Tarefas usuario(Usuarios usuario) {
+    public Tarefas usuario(Usuario usuario) {
         setUsuario(usuario);
         return this;
     }

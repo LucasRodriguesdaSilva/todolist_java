@@ -18,15 +18,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = Usuarios.TABLE_NAME)
-public class Usuarios {
-    public interface CreateUser {
+@Table(name = Usuario.TABLE_NAME)
+public class Usuario {
+    public interface CreateUsuarios {
     }
 
-    public interface UpdateUser {
+    public interface UpdateUsuarios {
     }
 
-    public static final String TABLE_NAME = "usuarios";
+    public static final String TABLE_NAME = "usuario";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +34,14 @@ public class Usuarios {
     private Long id;
 
     @Column(name = "username", length = 100, unique = true, nullable = false)
-    @NotBlank(groups = CreateUser.class)
-    @Size(groups = CreateUser.class, min = 2, max = 100)
+    @NotBlank(groups = CreateUsuarios.class)
+    @Size(groups = CreateUsuarios.class, min = 2, max = 100)
     private String username;
 
     @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "password", length = 60, nullable = false)
-    @NotBlank(groups = { CreateUser.class, UpdateUser.class })
-    @Size(groups = { CreateUser.class, UpdateUser.class }, min = 8, max = 60)
+    @NotBlank(groups = { CreateUsuarios.class, UpdateUsuarios.class })
+    @Size(groups = { CreateUsuarios.class, UpdateUsuarios.class }, min = 8, max = 60)
     private String password;
 
     @OneToMany(mappedBy = "usuario")
@@ -57,10 +57,10 @@ public class Usuarios {
 
     
 
-    public Usuarios() {
+    public Usuario() {
     }
 
-    public Usuarios(Long id, String username, String password) {
+    public Usuario(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -98,10 +98,10 @@ public class Usuarios {
         if (obj == null)
             return false;
 
-        if (!(obj instanceof Usuarios))
+        if (!(obj instanceof Usuario))
             return false;
 
-        Usuarios usuario = (Usuarios) obj;
+        Usuario usuario = (Usuario) obj;
 
         if (this.id == null) {
             if (usuario.id != null)
